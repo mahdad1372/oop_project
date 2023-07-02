@@ -78,7 +78,7 @@ public class salary {
                         "has the salary equal to " + salary_id_List.get(i));
             }
         } else {
-            System.out.println("Sorry there is not any loan in the list of loans");
+            System.out.println("Sorry there is not any salary in the list of salaries");
         }
         salary_introduce_section();
     }
