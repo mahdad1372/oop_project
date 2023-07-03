@@ -1,36 +1,27 @@
 package employee;
 
+import loan.loan;
 import menu.menu;
+import salary.salary;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class employee {
-    ArrayList<Integer> Idnumbers = new ArrayList<>();
-    ArrayList<String> firstname_List = new ArrayList<>();
-    ArrayList<String> lastname_List = new ArrayList<>();
-    ArrayList<String> birthday_List = new ArrayList<>();
-    ArrayList<Integer> identification_number_List = new ArrayList<>();
+    static ArrayList<Integer> Idnumbers = new ArrayList<>();
+    static ArrayList<String> firstname_List = new ArrayList<>();
+    static ArrayList<String> lastname_List = new ArrayList<>();
+    static ArrayList<String> birthday_List = new ArrayList<>();
+    static ArrayList<Integer> identification_number_List = new ArrayList<>();
+
     private int employee_idnumber;
     private String firstname;
     private String lastname;
     private String birthday;
     private int identification_number;
+     loan loan = new loan();
 
-    public void employee_gettinginformation() {
 
-        System.out.println("Hello dear manager welcome to the employee managment system");
-        System.out.println("Please add the specification of your employee step by step");
-
-    }
-
-    public void exportArray(ArrayList<String> array) {
-        // Access the elements of the array in the target entity
-        for (String element : array) {
-            System.out.println(element);
-        }
-        // ...
-    }
 
     public void addemployee(String firstname, int employee_idnumber, String lastname, String birthday,
                             int identification_number) {
@@ -42,13 +33,11 @@ public class employee {
     }
 
     public void setting_info() {
-        // loan new_employee_loan = new loan();
-        // new_employee_loan.loan_intoduce_section();
-        // employee_gettinginformation();
         boolean loop = true;
 
         while (loop) {
-            System.out.println("Please enter the fisrtname of the employee");
+           System.out.println("Please enter the fisrtname of the employee");
+
             Scanner myInput = new Scanner(System.in);
             Scanner myInput2 = new Scanner(System.in);
             String name = myInput.nextLine();
@@ -56,9 +45,8 @@ public class employee {
             System.out.println("Please enter the lastname of the employee");
             String last_name = myInput.nextLine();
             lastname_List.add(last_name);
-            System.out.println("Please enter the id number of the employee");
-            int idnumber = myInput.nextInt();
-            Idnumbers.add(idnumber);
+            this.employee_idnumber = this.employee_idnumber +1;
+            Idnumbers.add(this.employee_idnumber);
             System.out.println("Please enter the birthday of the employee");
             String birthday = myInput2.nextLine();
             birthday_List.add(birthday);
@@ -68,6 +56,7 @@ public class employee {
             addemployee(firstname, employee_idnumber, lastname, birthday, identification_number);
             System.out.println("Do you want to add more employee?");
             String conditionforcontinue = myInput.next();
+
             if (conditionforcontinue.equals("No") ||
                     conditionforcontinue.equals("NO") ||
                     conditionforcontinue.equals("no")) {
@@ -76,16 +65,16 @@ public class employee {
             }
         }
         additional_operation();
+
     }
 
     public void display_employees() {
+        System.out.println("welcome to display employees section ");
         if (Idnumbers.size() > 0) {
             for (int i = 0; i <= Idnumbers.size() - 1; i++) {
-                System.out.println("So this is your employee with name " +
-                        firstname_List.get(i) + " " + lastname_List.get(i) +
-                        " identification number "
-                        + identification_number_List.get(i) + " birthday " +
-                        birthday_List.get(i) + " id numbers " + Idnumbers.get(i));
+                System.out.println(" The employee with the name of " + firstname_List.get(i) +
+                        " "+lastname_List.get(i) + " with the id number" + Idnumbers.get(i)
+                + " Identification number " + identification_number_List.get(i));
             }
         } else {
             System.out.println("Sorry there is not any employee in the list of employees");
@@ -133,7 +122,7 @@ public class employee {
             System.out.println("Please enter new employee id number");
             int new_num = myInput.nextInt();
             update_list_int(Idnumbers, idnumber, new_num);
-            display_employees();
+
         }
         if (option_number == 2) {
             Scanner myInput2 = new Scanner(System.in);
@@ -142,7 +131,7 @@ public class employee {
             System.out.println("Please enter new employee firstname");
             String new_firstname = myInput2.nextLine();
             update_list_string(firstname_List, firstname, new_firstname);
-            display_employees();
+
         }
         if (option_number == 3) {
             System.out.println("Please enter employee lastname");
@@ -150,7 +139,7 @@ public class employee {
             System.out.println("Please enter new employee lastname");
             String new_lastname = myInput.nextLine();
             update_list_string(lastname_List, lastname, new_lastname);
-            display_employees();
+
         }
         if (option_number == 4) {
             System.out.println("Please enter birthday");
@@ -158,7 +147,7 @@ public class employee {
             System.out.println("Please enter new birthday");
             String new_birthday = myInput.nextLine();
             update_list_string(birthday_List, birthday, new_birthday);
-            display_employees();
+
         }
         if (option_number == 5) {
             System.out.println("Please enter employee identification_number");
@@ -166,12 +155,13 @@ public class employee {
             System.out.println("Please enter new employee identification_number");
             int new_num = myInput.nextInt();
             update_list_int(Idnumbers, idnumber, new_num);
-            display_employees();
+
         }
     }
 
     public void employee() {
         menu menu = new menu();
+        loan loan = new loan();
         System.out.println(
                 "Welcome to employee info section which type of operation you want to do? please enter the number of option ");
         System.out.println(
@@ -190,22 +180,27 @@ public class employee {
         if (number_operation == 4) {
             display_employees();
         }
-        if (number_operation == 4) {
-            display_employees();
-        }
 
         if (number_operation == 5) {
+
             menu.menu_description();
         }
+
     }
 
     public void additional_operation() {
+        salary salary = new salary();
+        menu menu = new menu();
         System.out.println(
                 "Do you want to do more operation");
         Scanner myInput1 = new Scanner(System.in);
         String condition = myInput1.nextLine();
         if (condition.equals("yes") || condition.equals("Yes")) {
             employee();
+        }else {
+            salary.import_employee(this.Idnumbers);
+            loan.import_employee(this.Idnumbers);
+            menu.menu_description();
         }
     }
 }

@@ -1,26 +1,31 @@
 package department;
 
+import menu.menu;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class department {
-    private int department_id;
+    private int department_id = 0;
     private String department_name;
-    ArrayList<String> department_name_list = new ArrayList<>();
-    ArrayList<Integer> department_id_list = new ArrayList<>();
+
+    static ArrayList<String> department_name_list = new ArrayList<>();
+    static ArrayList<Integer> department_id_list = new ArrayList<>();
     Scanner myInput = new Scanner(System.in);
+    menu menu = new menu();
 
     public void add_department() {
-        int i = 1;
-        this.department_id = i;
+        Scanner add_department_input = new Scanner(System.in);
+
+        this.department_id = this.department_id + 1;
         department_id_list.add(this.department_id);
-        i +=1;
         System.out.println("Please add the name of the department");
-        String department = myInput.nextLine();
+        String department = add_department_input.nextLine();
         this.department_name = department;
         department_name_list.add(this.department_name);
         System.out.println("So the department with the id of "+ this.department_id +
                 " and with the name of "+this.department_name + " add to the department section");
+        more_operation();
 
     }
     public void update_department() {
@@ -32,10 +37,11 @@ public class department {
             System.out.println("Please add the new name if the department");
             String new_department = myInput.nextLine();
             department_name_list.set(index,new_department);
-            System.out.println("The department succesfuly updated");
+            System.out.println("The department sucsessfully updated");
         }else{
             System.out.println("Sorry the department id that you add is not in the list of the departments");
         }
+        more_operation();
 
     }
     public void delete_department() {
@@ -50,6 +56,7 @@ public class department {
         }else{
             System.out.println("Sorry the department id that you add is not in the list of the departments");
         }
+        more_operation();
 
     }
     public void display_department() {
@@ -61,7 +68,7 @@ public class department {
         } else {
             System.out.println("Sorry there is not any department in the list of departments");
         }
-        department_description();
+        more_operation();
     }
     public void department_description(){
         System.out.println("Welcome to the section of the department");
@@ -80,6 +87,16 @@ public class department {
         }
         if (option_number == 4) {
             display_department();
+        }
+    }
+    public void more_operation(){
+        Scanner more_operation = new Scanner(System.in);
+        System.out.println("Do you want to add more operation");
+        String condition = more_operation.nextLine();
+        if (condition.equals("Yes") || condition.equals("yes")){
+            department_description();
+        }else {
+            menu.menu_description();
         }
     }
 }

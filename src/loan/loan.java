@@ -15,11 +15,11 @@ public class loan {
 
     }
 
-    ArrayList<Integer> Idnumbers_employee = new ArrayList<>();
-    ArrayList<Integer> Idnumbers_employee_frk = new ArrayList<>();
-    ArrayList<Integer> loan_id_List = new ArrayList<>();
-    ArrayList<String> loan_type_List = new ArrayList<>();
-    ArrayList<Integer> loan_amount_List = new ArrayList<>();
+    static ArrayList<Integer> Idnumbers_employee = new ArrayList<>();
+    static ArrayList<Integer> Idnumbers_employee_frk = new ArrayList<>();
+    static ArrayList<Integer> loan_id_List = new ArrayList<>();
+    static ArrayList<String> loan_type_List = new ArrayList<>();
+    static ArrayList<Integer> loan_amount_List = new ArrayList<>();
     Scanner myInput = new Scanner(System.in);
     menu menu_section = new menu();
 
@@ -45,6 +45,7 @@ public class loan {
         } else {
             System.out.println("Sorry this employee with this id number is not in the list");
         }
+        additional_operation();
     }
 
     public void display_loan() {
@@ -59,7 +60,7 @@ public class loan {
         } else {
             System.out.println("Sorry there is not any loan in the list of loans");
         }
-        loan_introduce_section();
+        additional_operation();
     }
 
     public void update_list_int(ArrayList<Integer> arr, int id, int new_num) {
@@ -85,6 +86,7 @@ public class loan {
         loan_amount_List.remove(index);
         System.out.println("Now the load with the id number " + idnumber_loan +
                 "completely remove");
+        additional_operation();
     }
 
     public void update_loan() {
@@ -110,6 +112,7 @@ public class loan {
             Integer employee_id = myInput.nextInt();
             update_list_int(Idnumbers_employee_frk, id_number, employee_id);
         }
+        additional_operation();
     }
 
     public void loan_introduce_section() {
@@ -141,8 +144,19 @@ public class loan {
         }
 
     }
-
-    public void exportArray(ArrayList<Integer> array) {
+    public void additional_operation() {
+        menu menu = new menu();
+        System.out.println(
+                "Do you want to do more operation");
+        Scanner myInput1 = new Scanner(System.in);
+        String condition = myInput1.nextLine();
+        if (condition.equals("yes") || condition.equals("Yes")) {
+            loan_introduce_section();
+        }else {
+            menu.menu_description();
+        }
+    }
+    public void import_employee(ArrayList<Integer> array) {
         int size = array.size();
         if (size > 0) {
             for (Integer element : array) {

@@ -10,22 +10,13 @@ public class salary {
     private int working_days;
     private int total_salary;
     private int employee_id;
-    ArrayList<Integer> Idnumbers_employee = new ArrayList<>();
-    ArrayList<Integer> Idnumbers_employee_frk = new ArrayList<>();
-    ArrayList<Integer> salary_id_List = new ArrayList<>();
-    ArrayList<Integer> total_salary_List = new ArrayList<>();
+    static ArrayList<Integer> Idnumbers_employee = new ArrayList<>();
+    static ArrayList<Integer> Idnumbers_employee_frk = new ArrayList<>();
+    static ArrayList<Integer> salary_id_List = new ArrayList<>();
+    static ArrayList<Integer> total_salary_List = new ArrayList<>();
     Scanner myInput = new Scanner(System.in);
 
-    public void exportArray(ArrayList<Integer> array) {
-        int size = array.size();
-        if (size > 0) {
-            for (Integer element : array) {
-                Idnumbers_employee.add(element);
 
-            }
-        }
-
-    }
     public void add_salary() {
         System.out.println("Please add the employee id that you want to set salary for him");
         int employee_id = myInput.nextInt();
@@ -36,10 +27,8 @@ public class salary {
         } else {
             System.out.println("Sorry this employee with this id number is not in the list");
         }
-        int i =1;
-        this.salary_id = i;
+        this.salary_id = this.salary_id  + 1;
         salary_id_List.add(this.salary_id);
-        i +=1;
         System.out.println("Please add the amount of the salary for each day of working");
         int salary_perday = myInput.nextInt();
         this.salary_daily = salary_perday;
@@ -49,6 +38,9 @@ public class salary {
         System.out.println("Please add the number of days that the employee has worked in the company");
         this.total_salary = this.working_days * this.salary_daily;
         total_salary_List.add(this.total_salary);
+        System.out.println("So the salary for the employee with the Id number of " + this.employee_id
+        + " is : " + this.total_salary);
+        additional_operation();
     }
     public void update_salary() {
         Scanner myInput = new Scanner(System.in);
@@ -60,6 +52,7 @@ public class salary {
         total_salary_List.set(index, new_salary);
         System.out.println("so the amount of the salary for the employee with the id of "+ Idnumbers_employee_frk.get(index) + " is this" +
                 " " + total_salary_List.get(index));
+        additional_operation();
     }
     public void delete_salary() {
         System.out.println("Please add the salary id that you want to remove");
@@ -70,6 +63,7 @@ public class salary {
         total_salary_List.remove(index);
         System.out.println("Now the load with the id number " + salary_id +
                 "completely remove");
+        additional_operation();
     }
     public void display_salary() {
         if (salary_id_List.size() > 0) {
@@ -80,7 +74,7 @@ public class salary {
         } else {
             System.out.println("Sorry there is not any salary in the list of salaries");
         }
-        salary_introduce_section();
+        additional_operation();();
     }
     public void salary_introduce_section() {
         menu menu = new menu();
@@ -105,6 +99,28 @@ public class salary {
             System.out.println(
                     "Sorry for enter to the salary section first you need to add employees without employee it's impossible to enter to this secton");
             menu.menu_description();
+        }
+
+    }
+    public void additional_operation() {
+        menu menu = new menu();
+        System.out.println(
+                "Do you want to do more operation");
+        Scanner myInput1 = new Scanner(System.in);
+        String condition = myInput1.nextLine();
+        if (condition.equals("yes") || condition.equals("Yes")) {
+            salary_introduce_section();
+        }else {
+            menu.menu_description();
+        }
+    }
+    public void import_employee(ArrayList<Integer> array) {
+        int size = array.size();
+        if (size > 0) {
+            for (Integer element : array) {
+                Idnumbers_employee.add(element);
+
+            }
         }
 
     }
