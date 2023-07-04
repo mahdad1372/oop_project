@@ -1,7 +1,8 @@
 package loan;
-import menu.menu;
-import java.util.ArrayList;
 
+import menu.menu;
+import employee.employee;
+import java.util.ArrayList;
 import java.util.Scanner;
 public class loan {
     private int loan_id;
@@ -23,7 +24,9 @@ public class loan {
     Scanner myInput = new Scanner(System.in);
     menu menu_section = new menu();
 
+
     public void add_loan() {
+        employee employee = new employee();
         System.out.println("Please add the loan id");
         int idnumber = myInput.nextInt();
         this.loan_id = idnumber;
@@ -38,7 +41,7 @@ public class loan {
         loan_amount_List.add(this.loan_amount);
         System.out.println("Please add the employee id that you want to give hime the loan");
         int employee_id = myInput.nextInt();
-        boolean containsElement = Idnumbers_employee.contains(employee_id);
+        boolean containsElement = employee.checking_employee_id(employee_id);
         if (containsElement) {
             this.employee_id = employee_id;
             Idnumbers_employee_frk.add(this.employee_id);

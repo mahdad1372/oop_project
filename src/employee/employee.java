@@ -188,6 +188,33 @@ public class employee {
 
     }
 
+    public boolean checking_employee_id(int id){
+        boolean checking = this.Idnumbers.contains(id);
+        if (checking){
+            return true;
+        }else {
+            return false;
+        }
+    }
+    public boolean availability_employee(){
+        if (this.Idnumbers.size() > 0){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    public String employee_name(int id) {
+        int index = this.Idnumbers.indexOf(id);
+        String fname = firstname_List.get(index);
+        String lname = lastname_List.get(index);
+        return fname + lname;
+    }
+
+    public int sum(int a, int b) {
+        int result = a + b;
+        return result;
+    }
     public void additional_operation() {
         salary salary = new salary();
         menu menu = new menu();

@@ -20,13 +20,20 @@ public class salary {
     public void add_salary() {
         System.out.println("Please add the employee id that you want to set salary for him");
         int employee_id = myInput.nextInt();
-        boolean containsElement = Idnumbers_employee.contains(employee_id);
-        if (containsElement) {
-            this.employee_id = employee_id;
-            Idnumbers_employee_frk.add(this.employee_id);
+        boolean find_id_employee = Idnumbers_employee.contains(employee_id);
+        if (find_id_employee) {
+            System.out.println("Sorry for this employee previously has set the salary");
         } else {
-            System.out.println("Sorry this employee with this id number is not in the list");
+            boolean containsElement = Idnumbers_employee.contains(employee_id);
+            if (containsElement) {
+                this.employee_id = employee_id;
+                Idnumbers_employee_frk.add(this.employee_id);
+            } else {
+                System.out.println("Sorry this employee with this id number is not in the list let's try another employee");
+                this.add_salary();
+            }
         }
+
         this.salary_id = this.salary_id  + 1;
         salary_id_List.add(this.salary_id);
         System.out.println("Please add the amount of the salary for each day of working");
@@ -39,7 +46,7 @@ public class salary {
         this.total_salary = this.working_days * this.salary_daily;
         total_salary_List.add(this.total_salary);
         System.out.println("So the salary for the employee with the Id number of " + this.employee_id
-        + " is : " + this.total_salary);
+        + " is : " + this.total_salary + "with the salary id of this :" + this.salary_id);
         additional_operation();
     }
     public void update_salary() {
@@ -69,12 +76,12 @@ public class salary {
         if (salary_id_List.size() > 0) {
             for (int i = 0; i <= salary_id_List.size() - 1; i++) {
                 System.out.println("So the employee with the id " +Idnumbers_employee_frk.get(i) +
-                        "has the salary equal to " + salary_id_List.get(i));
+                        "has the salary equal to " + total_salary_List.get(i) + "euro");
             }
         } else {
             System.out.println("Sorry there is not any salary in the list of salaries");
         }
-        additional_operation();();
+        additional_operation();
     }
     public void salary_introduce_section() {
         menu menu = new menu();

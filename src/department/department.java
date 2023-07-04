@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class department {
-    private int department_id = 0;
+    private int department_id;
     private String department_name;
 
     static ArrayList<String> department_name_list = new ArrayList<>();
@@ -88,6 +88,21 @@ public class department {
         if (option_number == 4) {
             display_department();
         }
+    }
+
+    public boolean check_department_availability(int id){
+        boolean id_contain = department_id_list.contains(id);
+        if(id_contain){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    public String find_department(int id){
+        int index = department_id_list.indexOf(id);
+        String department_name = department_name_list.get(index);
+        return  department_name;
     }
     public void more_operation(){
         Scanner more_operation = new Scanner(System.in);
