@@ -156,7 +156,7 @@ public class task {
         Scanner myInput1 = new Scanner(System.in);
         String condition = myInput1.nextLine();
         if (condition.equals("yes") || condition.equals("Yes")) {
-            introduce_section_project();
+            introduce_section_task();
         }else {
             menu.menu_description();
         }
@@ -175,7 +175,7 @@ public class task {
         }
         additional_operation();
     }
-    public void introduce_section_project(){
+    public void introduce_section_task(){
         System.out.println("Welcome to the project section which type of the operation you want to do");
         System.out.println(
                 "1)add project 2)update project 3)delete project 4)get all projects");

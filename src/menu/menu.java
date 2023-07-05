@@ -1,11 +1,13 @@
 package menu;
 
+import attendance.attendance;
 import department.department;
 import employee.employee;
 import loan.loan;
 import project.project;
 import role.role;
 import salary.salary;
+import task.task;
 
 import java.util.Scanner;
 public class menu {
@@ -18,11 +20,13 @@ public class menu {
         role role = new role();
         project project = new project();
         salary salary = new salary();
+        task task = new task();
         employee employee_section = new employee();
         department department = new department();
+        attendance attendance = new attendance();
         System.out.println("Hello dear manager welcome to the employee managment system");
         System.out.println("Which section you want to enter: 1)employee registration and details  2)loan" +
-                " 3)salary  4)department  5)role  6)project  7)task  8)exit");
+                " 3)salary  4)department  5)role  6)project  7)task 8)Attendance  9)exit");
         int option = myInput.nextInt();
         if (option == 1) {
             employee_section.employee();
@@ -42,12 +46,15 @@ public class menu {
             role.role_introduce_section();
         }
         if (option == 6) {
-            System.exit(0);
+            project.introduce_section_project();
         }
         if (option == 7) {
-            System.exit(0);
+            task.introduce_section_task();
         }
         if (option == 8) {
+            attendance.attendence_description();
+        }
+        if (option == 9) {
             System.exit(0);
         }
     }
