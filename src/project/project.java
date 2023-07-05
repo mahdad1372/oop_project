@@ -141,4 +141,22 @@ public class project {
             display_projects();
         }
     }
+    public boolean  project_availability(){
+        if (project_id_list.size() > 0){
+            return true;
+        }else {
+            return false;
+        }
+    }
+    public boolean check_project_by_id(int id){
+        if (project_id_list.contains(id)){
+            return true;
+        }else {
+            return false;
+        }
+    }
+    public String check_project_name(int id){
+        int index = project_id_list.indexOf(id);
+        return project_name_list.get(index);
+    }
 }
