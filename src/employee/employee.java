@@ -208,7 +208,7 @@ public class employee {
         int index = this.Idnumbers.indexOf(id);
         String fname = firstname_List.get(index);
         String lname = lastname_List.get(index);
-        return fname + lname;
+        return fname + " "+lname;
     }
 
     public int sum(int a, int b) {

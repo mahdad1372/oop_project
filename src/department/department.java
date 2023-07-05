@@ -98,7 +98,13 @@ public class department {
             return false;
         }
     }
-
+    public boolean availability_department(){
+        if (this.department_id_list.size() > 0){
+            return true;
+        }else {
+            return false;
+        }
+    }
     public String find_department(int id){
         int index = department_id_list.indexOf(id);
         String department_name = department_name_list.get(index);
