@@ -2,6 +2,7 @@ package manager;
 
 import department.department;
 import employee.employee;
+import menu.menu;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -16,7 +17,7 @@ public class manager {
     static ArrayList<String> manager_name_list = new ArrayList<>();
     static ArrayList<Integer> department_id_list = new ArrayList<>();
     static ArrayList<Integer> employee_id_list = new ArrayList<>();
-
+    menu menu = new menu();
     public void add_manager(){
         employee employee = new employee();
         department department = new department();
@@ -46,6 +47,7 @@ public class manager {
         this.manager_id = this.manager_id + 1;
         manager_id_list.add(this.manager_id);
         System.out.println("So " + this.manager_name +" has elected as the director of the " +department.find_department(this.department_id));
+        more_operation();
     }
 
     public void update_manger(){
@@ -86,7 +88,10 @@ public class manager {
             int index = manager_id_list.indexOf(manager_id);
             department_id_list.set(index,department_id);
         }
+        more_operation();
     }
+
+
 
     public void delete_manager(){
         System.out.println("Please add the id of the manager that you want to remove");
@@ -97,12 +102,59 @@ public class manager {
             int index = manager_id_list.indexOf(id_contain);
             department_id_list.remove(index);
             manager_id_list.remove(index);
+            employee_id_list.remove(index);
+            manager_name_list.remove(index);
             System.out.println("The department sucessfuly updated");
         }else{
-            System.out.println("Sorry the department id that you add is not in the list of the departments");
+            System.out.println("Sorry the department id that you add is not in the list of the departments please try again");
+            this.delete_manager();
         }
-
-
+        more_operation();
     }
 
+    public void display_manager(){
+        department department = new department();
+        if (manager_id_list.size() > 0) {
+            for (int i = 0; i <= manager_id_list.size() - 1; i++) {
+                System.out.println(manager_name_list.get(i) + " is the manager of the department of  "
+                        + department.find_department(department_id_list.get(i)) + " with the manager id of" + manager_id_list.get(i));
+            }
+        } else {
+            System.out.println("Sorry there is not any role in the list of rols");
+        }
+        more_operation();
+    }
+    public void manager_description(){
+        Scanner manager_description = new Scanner(System.in);
+        System.out.println("Welcome to the section of the manager");
+        System.out.println("Please choose the which type of the operation you want to do");
+        System.out.println("1)Add manager 2)Edit manager 3)delete manager 4)display manager");
+        int option_number = manager_description.nextInt();
+
+        if (option_number == 1) {
+            add_manager();
+        }
+        if (option_number == 2) {
+            update_manger();
+        }
+        if (option_number == 3) {
+            delete_manager();
+        }
+        if (option_number == 4) {
+            display_manager();
+        }
+        more_operation();
+    }
+
+    public void more_operation(){
+        menu menu = new menu();
+        Scanner more_operation = new Scanner(System.in);
+        System.out.println("Do you want to add more operation");
+        String condition = more_operation.nextLine();
+        if (condition.equals("Yes") || condition.equals("yes")){
+            manager_description();
+        }else {
+            menu.menu_description();
+        }
+    }
 }
