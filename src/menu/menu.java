@@ -22,7 +22,7 @@ public class menu {
         department department = new department();
         System.out.println("Hello dear manager welcome to the employee managment system");
         System.out.println("Which section you want to enter: 1)employee registration and details  2)loan" +
-                " 3)salary  4)department  5)role  6)project  7)exit");
+                " 3)salary  4)department  5)role  6)project  7)task  8)exit");
         int option = myInput.nextInt();
         if (option == 1) {
             employee_section.employee();
@@ -47,6 +47,8 @@ public class menu {
         if (option == 7) {
             System.exit(0);
         }
-
+        if (option == 8) {
+            System.exit(0);
+        }
     }
 }
