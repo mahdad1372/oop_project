@@ -3,7 +3,7 @@ package employee;
 import loan.loan;
 import menu.menu;
 import salary.salary;
-
+import abstraction.employee_info;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -69,12 +69,15 @@ public class employee {
     }
 
     public void display_employees() {
+        employee_info employee_info = new employee_info();
+
         System.out.println("welcome to display employees section ");
         if (Idnumbers.size() > 0) {
             for (int i = 0; i <= Idnumbers.size() - 1; i++) {
-                System.out.println(" The employee with the name of " + firstname_List.get(i) +
-                        " "+lastname_List.get(i) + " with the id number" + Idnumbers.get(i)
-                + " Identification number " + identification_number_List.get(i));
+                employee_info.display_info(firstname_List.get(i),lastname_List.get(i),Idnumbers.get(i),identification_number_List.get(i));
+//                System.out.println(" The employee with the name of " + firstname_List.get(i) +
+//                        " "+lastname_List.get(i) + " with the id number" + Idnumbers.get(i)
+//                + " Identification number " + identification_number_List.get(i));
             }
         } else {
             System.out.println("Sorry there is not any employee in the list of employees");
