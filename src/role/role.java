@@ -18,6 +18,17 @@ public class role {
     static ArrayList<Integer> employee_id_list = new ArrayList<>();
     employee employee = new employee();
 
+    class introduction{
+        public void section_introduction() {
+            System.out.println("This is about the introduction of each section");
+        }
+    }
+
+    class role_introduction extends introduction{
+        public void section_introduction() {
+            System.out.println("Welcome to the role section, the aim of this section is to set role for each employee");
+        }
+    }
     public void add_role(){
         department department = new department();
         System.out.println("Please add the Id number of the employee");
@@ -159,10 +170,12 @@ public class role {
         additional_operation();
     }
     public void role_introduce_section() {
+        role_introduction role_intro = new role_introduction();
         boolean contain_employee = employee.availability_employee();
         menu menu = new menu();
         if (contain_employee) {
-            System.out.println("Welcome to the loan section which type of the operation you want to do");
+            role_intro.section_introduction();
+            System.out.println("Please choose which type of the operation you want to do");
             System.out.println(
                     "1)add role 2)update role 3)delete role 4)get all loans types of loans");
             System.out.println("Please add the number of option");

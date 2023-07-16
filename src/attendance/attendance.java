@@ -17,6 +17,7 @@ public class attendance {
     static ArrayList<String> enter_time_list = new ArrayList<>();
    menu menu = new menu();
 
+
     public void add_attendance() {
         employee employee = new employee();
         Scanner add_attendance_input = new Scanner(System.in);

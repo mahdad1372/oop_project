@@ -19,26 +19,58 @@ public class task {
     static ArrayList<String> description_list = new ArrayList<>();
     static ArrayList<Integer> employee_id_list = new ArrayList<>();
     static ArrayList<Integer> project_id_list = new ArrayList<>();
+    class task_specification{
+        private Integer task_id = 0;
+        private String task_name;
+        private String description;
+        static ArrayList<Integer> task_id_list = new ArrayList<>();
+        static ArrayList<String> task_name_list = new ArrayList<>();
+        static ArrayList<String> description_list = new ArrayList<>();
+        public void add_detail_task (String name, String description)
+        {
+            this.task_id += 1;
+            this.task_name = name;
+            this.description = description;
+            this.task_id_list.add(this.task_id);
+            this.task_name_list.add(this.task_name);
+            this.description_list.add(this.description);
+        }
+    }
+
+    class project_specification{
+        employee employee = new employee();
+        project project = new project();
+        boolean project_availability = project.project_availability();
+        boolean employee_availability = employee.availability_employee();
+
+        public void checking_project( ){
+            if (!project_availability){
+                System.out.println("Sorry for enter to this section first you need to add some project, now there is"+
+                        "not any project");
+                menu.menu_description();
+            }
+            if (!employee_availability){
+                System.out.println("Sorry for enter to this section first you need to add some employee, now there is"+
+                        "not any employee");
+                menu.menu_description();
+            }
+
+        }
+    }
+
 
     menu menu = new menu();
-    project project = new project();
+
     employee employee = new employee();
     public void add_task(){
-        boolean project_availability = project.project_availability();
-        if (!project_availability){
-            System.out.println("Sorry for enter to this section first you need to add some project, now there is"+
-                    "not any project");
-            menu.menu_description();
-        }
-        boolean employee_availability = employee.availability_employee();
-        if (!employee_availability){
-            System.out.println("Sorry for enter to this section first you need to add some employee, now there is"+
-                    "not any employee");
-            menu.menu_description();
-        }
+        project project = new project();
+        project_specification project_spec = new project_specification();
+        task_specification new_task = new task_specification();
+        project_spec.checking_project();
         System.out.println("Please add the project id that you want to create task for it");
         Scanner add_project_scanner = new Scanner(System.in);
         int project_id = add_project_scanner.nextInt();
+        project.check_project_by_id(project_id);
         boolean project_check_id = project.check_project_by_id(project_id);
         if (!project_check_id){
             System.out.println("sorry this project is not in the list please try again");
@@ -57,16 +89,11 @@ public class task {
         System.out.println("please add the task name");
         Scanner add_task_scanner = new Scanner(System.in);
         String task_name = add_task_scanner.nextLine();
-        this.task_name = task_name;
         System.out.println("please add the description for the task");
         Scanner add_description_scanner = new Scanner(System.in);
         String add_description = add_description_scanner.nextLine();
-        this.description =add_description;
-        this.task_id = this.task_id +1;
-        task_id_list.add(this.task_id);
+        new_task.add_detail_task(task_name,add_description);
         project_id_list.add(this.project_id);
-        task_name_list.add(this.task_name);
-        description_list.add(this.description);
         employee_id_list.add(this.employee_id);
         System.out.println("So the task " + this.task_name + " with the id "+ this.task_id+
                 "devoted to the "+ employee.employee_name(this.employee_id) + " and it's related to the project of "
