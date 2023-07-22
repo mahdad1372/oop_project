@@ -17,6 +17,7 @@ public class employee {
     private int employee_idnumber;
     private String firstname;
     private String lastname;
+    private  String employee_name;
     private String birthday;
     private String identification_number;
      loan loan = new loan();
@@ -76,9 +77,6 @@ public class employee {
             for (int i = 0; i <= Idnumbers.size() - 1; i++) {
                 employee_info.display_info(firstname_List.get(i),lastname_List.get(i),Idnumbers.get(i),
                         identification_number_List.get(i));
-//                System.out.println(" The employee with the name of " + firstname_List.get(i) +
-//                        " "+lastname_List.get(i) + " with the id number" + Idnumbers.get(i)
-//                + " Identification number " + identification_number_List.get(i));
             }
         } else {
             System.out.println("Sorry there is not any employee in the list of employees");
@@ -206,6 +204,15 @@ public class employee {
         }else {
             return false;
         }
+    }
+    public void setName_by_id(int id){
+        int index = this.Idnumbers.indexOf(id);
+        String fname = firstname_List.get(index);
+        String lname = lastname_List.get(index);
+        this.employee_name = fname+lname;
+    }
+    public String getName(){
+        return  this.employee_name;
     }
 
     public String employee_name(int id) {

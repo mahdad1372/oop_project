@@ -26,7 +26,7 @@ public class task {
         static ArrayList<Integer> task_id_list = new ArrayList<>();
         static ArrayList<String> task_name_list = new ArrayList<>();
         static ArrayList<String> description_list = new ArrayList<>();
-        public void add_detail_task (String name, String description, Integer employee_id , String project_name)
+        public void add_detail_task (String name, String description, String employee_name , String project_name)
         {
             this.task_id += 1;
             this.task_name = name;
@@ -35,7 +35,7 @@ public class task {
             this.task_name_list.add(this.task_name);
             this.description_list.add(this.description);
             System.out.println("So the task " + name + " and description of  " + description+ " with the id "+ this.task_id+
-                "devoted to the "+ employee_id + " and it's related to the project of "
+                "devoted to the "+ employee_name + " and it's related to the project of "
             + project_name);
         }
     }
@@ -96,7 +96,9 @@ public class task {
         System.out.println("please add the description for the task");
         Scanner add_description_scanner = new Scanner(System.in);
         String add_description = add_description_scanner.nextLine();
-        new_task.add_detail_task(task_name,add_description,employee_id,project.check_project_name(this.project_id));
+        employee.setName_by_id(this.employee_id);
+        String employee_name = employee.getName();
+        new_task.add_detail_task(task_name,add_description,employee_name,project.check_project_name(this.project_id));
         project_id_list.add(this.project_id);
         employee_id_list.add(this.employee_id);
         this.additional_operation();
