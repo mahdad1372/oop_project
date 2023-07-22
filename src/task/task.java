@@ -26,7 +26,7 @@ public class task {
         static ArrayList<Integer> task_id_list = new ArrayList<>();
         static ArrayList<String> task_name_list = new ArrayList<>();
         static ArrayList<String> description_list = new ArrayList<>();
-        public void add_detail_task (String name, String description)
+        public void add_detail_task (String name, String description, Integer employee_id , String project_name)
         {
             this.task_id += 1;
             this.task_name = name;
@@ -34,6 +34,9 @@ public class task {
             this.task_id_list.add(this.task_id);
             this.task_name_list.add(this.task_name);
             this.description_list.add(this.description);
+            System.out.println("So the task " + name + " and description of  " + description+ " with the id "+ this.task_id+
+                "devoted to the "+ employee_id + " and it's related to the project of "
+            + project_name);
         }
     }
 
@@ -84,6 +87,7 @@ public class task {
             System.out.println("sorry this employee is not in the list please try again");
             this.add_task();
         }
+
         this.project_id = project_id;
         this.employee_id = employee_id;
         System.out.println("please add the task name");
@@ -92,12 +96,10 @@ public class task {
         System.out.println("please add the description for the task");
         Scanner add_description_scanner = new Scanner(System.in);
         String add_description = add_description_scanner.nextLine();
-        new_task.add_detail_task(task_name,add_description);
+        new_task.add_detail_task(task_name,add_description,employee_id,project.check_project_name(this.project_id));
         project_id_list.add(this.project_id);
         employee_id_list.add(this.employee_id);
-        System.out.println("So the task " + this.task_name + " with the id "+ this.task_id+
-                "devoted to the "+ employee.employee_name(this.employee_id) + " and it's related to the project of "
-        + project.check_project_name(this.project_id));
+        this.additional_operation();
     }
     public void update_task(){
         employee employee = new employee();
@@ -205,7 +207,7 @@ public class task {
     public void introduce_section_task(){
         System.out.println("Welcome to the project section which type of the operation you want to do");
         System.out.println(
-                "1)add project 2)update project 3)delete project 4)get all projects");
+                "1)add task 2)update task 3)delete task 4)get all tasks");
         System.out.println("Please add the number of option");
         Scanner myInput = new Scanner(System.in);
         int option_number = myInput.nextInt();

@@ -12,19 +12,19 @@ public class employee {
     static ArrayList<String> firstname_List = new ArrayList<>();
     static ArrayList<String> lastname_List = new ArrayList<>();
     static ArrayList<String> birthday_List = new ArrayList<>();
-    static ArrayList<Integer> identification_number_List = new ArrayList<>();
+    static ArrayList<String> identification_number_List = new ArrayList<>();
 
     private int employee_idnumber;
     private String firstname;
     private String lastname;
     private String birthday;
-    private int identification_number;
+    private String identification_number;
      loan loan = new loan();
 
 
 
     public void addemployee(String firstname, int employee_idnumber, String lastname, String birthday,
-                            int identification_number) {
+                            String identification_number) {
         this.firstname = firstname;
         this.employee_idnumber = employee_idnumber;
         this.lastname = lastname;
@@ -51,7 +51,7 @@ public class employee {
             String birthday = myInput2.nextLine();
             birthday_List.add(birthday);
             System.out.println("Please enter the identification number of the employee");
-            int identification_number = myInput.nextInt();
+            String identification_number = myInput.nextLine();
             identification_number_List.add(identification_number);
             addemployee(firstname, employee_idnumber, lastname, birthday, identification_number);
             System.out.println("Do you want to add more employee?");
@@ -74,7 +74,8 @@ public class employee {
         System.out.println("welcome to display employees section ");
         if (Idnumbers.size() > 0) {
             for (int i = 0; i <= Idnumbers.size() - 1; i++) {
-                employee_info.display_info(firstname_List.get(i),lastname_List.get(i),Idnumbers.get(i),identification_number_List.get(i));
+                employee_info.display_info(firstname_List.get(i),lastname_List.get(i),Idnumbers.get(i),
+                        identification_number_List.get(i));
 //                System.out.println(" The employee with the name of " + firstname_List.get(i) +
 //                        " "+lastname_List.get(i) + " with the id number" + Idnumbers.get(i)
 //                + " Identification number " + identification_number_List.get(i));
