@@ -8,19 +8,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class task {
-    private int task_id;
-    private String task_name;
-    private String description;
-
-    private int employee_id;
-    private int project_id;
-    static ArrayList<Integer> task_id_list = new ArrayList<>();
-    static ArrayList<String> task_name_list = new ArrayList<>();
-    static ArrayList<String> description_list = new ArrayList<>();
-    static ArrayList<Integer> employee_id_list = new ArrayList<>();
-    static ArrayList<Integer> project_id_list = new ArrayList<>();
     class task_specification{
-        private Integer task_id = 0;
+        private Integer task_id;
         private String task_name;
         private String description;
         static ArrayList<Integer> task_id_list = new ArrayList<>();
@@ -41,10 +30,14 @@ public class task {
     }
 
     class project_specification{
+        private int employee_id;
+        private int project_id;
         employee employee = new employee();
         project project = new project();
         boolean project_availability = project.project_availability();
         boolean employee_availability = employee.availability_employee();
+        static ArrayList<String> project_name_list = new ArrayList<>();
+        static ArrayList<String> employee_name_list = new ArrayList<>();
 
         public void checking_project( ){
             if (!project_availability){
@@ -72,8 +65,8 @@ public class task {
         project_spec.checking_project();
         System.out.println("Please add the project id that you want to create task for it");
         Scanner add_project_scanner = new Scanner(System.in);
-        int project_id = add_project_scanner.nextInt();
-        project.check_project_by_id(project_id);
+        Integer project_id = add_project_scanner.nextInt();
+//        project.check_project_by_id(Integer.parseInt(project_id));
         boolean project_check_id = project.check_project_by_id(project_id);
         if (!project_check_id){
             System.out.println("sorry this project is not in the list please try again");
@@ -88,31 +81,33 @@ public class task {
             this.add_task();
         }
 
-        this.project_id = project_id;
-        this.employee_id = employee_id;
+        project_spec.project_id = project_id;
+        project_spec.employee_id = employee_id;
         System.out.println("please add the task name");
         Scanner add_task_scanner = new Scanner(System.in);
         String task_name = add_task_scanner.nextLine();
         System.out.println("please add the description for the task");
         Scanner add_description_scanner = new Scanner(System.in);
         String add_description = add_description_scanner.nextLine();
-        employee.setName_by_id(this.employee_id);
+        employee.setName_by_id(project_spec.employee_id);
         String employee_name = employee.getName();
-        new_task.add_detail_task(task_name,add_description,employee_name,project.check_project_name(this.project_id));
-        project_id_list.add(this.project_id);
-        employee_id_list.add(this.employee_id);
+        project_spec.employee_name_list.add(employee_name);
+        project_spec.project_name_list.add(project.check_project_name(project_spec.project_id));
+        new_task.add_detail_task(task_name,add_description,employee_name,project.check_project_name(project_spec.project_id));
         this.additional_operation();
     }
     public void update_task(){
         employee employee = new employee();
-        if(task_id_list.size() == 0){
+        project_specification project = new project_specification();
+        task_specification new_task = new task_specification();
+        if(new_task.task_id_list.size() == 0){
             System.out.println("Sorry there is nothing in the task list for update");
             this.additional_operation();
         }
         System.out.println("Please add the id number of the task that you want to update");
         Scanner update_task = new Scanner(System.in);
         int task_id_update = update_task.nextInt();
-        if(!task_id_list.contains(task_id_update)){
+        if(!new_task.task_id_list.contains(task_id_update)){
             System.out.println("Sorry there is not task with this id number in the task list so please try again");
             this.update_task();
         }
@@ -124,15 +119,15 @@ public class task {
             System.out.println("Please enter new task name");
             Scanner task_name_scanner = new Scanner(System.in);
             String task_name = task_name_scanner.nextLine();
-            int index = task_id_list.indexOf(task_id_update);
-            task_name_list.set(index,task_name);
+            int index = new_task.task_id_list.indexOf(task_id_update);
+            new_task.task_name_list.set(index,task_name);
         }
         if (choose_option_update == 2){
-            System.out.println("Please enter new id project");
+            System.out.println("Please enter new project name");
             Scanner project_name_scanner = new Scanner(System.in);
-            int project_id = project_name_scanner.nextInt();
-            int index = task_id_list.indexOf(task_id_update);
-            project_id_list.set(index,project_id);
+            String project_name = project_name_scanner.nextLine();
+            int index = new_task.task_id_list.indexOf(task_id_update);
+            project.project_name_list.set(index,project_name);
         }
         if (choose_option_update == 3){
             System.out.println("Please enter new employee id");
@@ -142,36 +137,38 @@ public class task {
                 System.out.println("Sorry there is not the id of the employee in list please try again");
                 this.update_task();
             }
-            int index = task_id_list.indexOf(task_id_update);
-            employee_id_list.set(index,employee_id);
+            int index = new_task.task_id_list.indexOf(task_id_update);
+            project.employee_name_list.set(index,employee.employee_name(employee_id));
         }
         if (choose_option_update == 4){
             System.out.println("Please add new description for the task");
             Scanner task_description_scanner = new Scanner(System.in);
             String new_description = task_description_scanner.nextLine();
-            int index = task_id_list.indexOf(task_id_update);
-            description_list.set(index,new_description);
+            int index = new_task.task_id_list.indexOf(task_id_update);
+            new_task.description_list.set(index,new_description);
         }
         System.out.println("Your task successfully updated");
         additional_operation();
     }
     public void delete_task() {
-        if(task_id_list.size() == 0){
+        project_specification project = new project_specification();
+        task_specification new_task = new task_specification();
+        if(new_task.task_id_list.size() == 0){
             System.out.println("Sorry there is not any task in the list try again");
             this.delete_task();
         }
         System.out.println("Please add the task id that you want to remove");
         Scanner delete_task = new Scanner(System.in);
         int id_task = delete_task.nextInt();
-        boolean contain_task = task_id_list.contains(id_task);
+        boolean contain_task = new_task.task_id_list.contains(id_task);
 
         if (contain_task){
-            int index = task_id_list.indexOf(id_task);
-            project_id_list.remove(index);
-            task_id_list.remove(index);
-            task_name_list.remove(index);
-            description_list.remove(index);
-            employee_id_list.remove(index);
+            int index = new_task.task_id_list.indexOf(id_task);
+            project.project_name_list.remove(index);
+            new_task.task_id_list.remove(index);
+            new_task.task_name_list.remove(index);
+            new_task.description_list.remove(index);
+            project.employee_name_list.remove(index);
             System.out.println("Now the task with the id number of " + id_task +
                     "completely remove");
         }else {
@@ -193,13 +190,14 @@ public class task {
         }
     }
     public void display_tasks(){
-        project project = new project();
-        if (task_id_list.size() > 0) {
-            for (int i = 0; i <= task_id_list.size() - 1; i++) {
-                System.out.println("So the task " + task_name_list.get(i) + "with the id "
-                        + task_id_list.get(i) + " that is about  " + description_list.get(i)
-                + " from project of " + project.check_project_name(project_id_list.get(i)) +
-                        " is devoted to the " + employee.employee_name(employee_id_list.get(i)));
+        project_specification project = new project_specification();
+        task_specification new_task = new task_specification();
+        if (new_task.task_id_list.size() > 0) {
+            for (int i = 0; i <= new_task.task_id_list.size() - 1; i++) {
+                System.out.println("So the task " + new_task.task_name_list.get(i) + "with the id "
+                        + new_task.task_id_list.get(i) + " that is about  " + new_task.description_list.get(i)
+                + " from project of " + project.project_name_list.get(i) +
+                        " is devoted to the " + project.employee_name_list.get(i));
             }
         } else {
             System.out.println("Sorry there is not any project in the list of projects");

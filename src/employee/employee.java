@@ -46,7 +46,7 @@ public class employee {
             System.out.println("Please enter the lastname of the employee");
             String last_name = myInput.nextLine();
             lastname_List.add(last_name);
-            this.employee_idnumber = this.employee_idnumber +1;
+            this.employee_idnumber+=1;
             Idnumbers.add(this.employee_idnumber);
             System.out.println("Please enter the birthday of the employee");
             String birthday = myInput2.nextLine();
