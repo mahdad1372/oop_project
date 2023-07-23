@@ -105,60 +105,56 @@ public class employee {
 
     }
 
-    public void update_list_string(ArrayList<String> arr, String charecter, String new_charecter) {
-        int index = arr.indexOf(charecter);
+    public void update_list_string(ArrayList<String> arr, int id, String new_charecter) {
+        int index = Idnumbers.indexOf(id);
         arr.set(index, new_charecter);
     }
 
     public void update_employee() {
-
+        if (Idnumbers.size() == 0 ){
+            System.out.println("Sorry there is not any employee in the list for updating");
+            this.employee();
+        }
+        System.out.println("Please add the id number of the employee that you want to update");
+        Scanner update_employee = new Scanner(System.in);
+        int employee_id_update = update_employee.nextInt();
+        boolean contain_employee = this.Idnumbers.contains(employee_id_update);
+        if(!contain_employee){
+            System.out.println("Sorry the employee id that you add is not in the list please try again");
+           update_employee();
+        }
         System.out.println("Which element you want to update please tell me");
-        System.out.println("1)employee_idnumber  2)firstname  3)lastname  4)birthday  5)identification_number");
+        System.out.println("1)firstname  2)lastname  3)birthday  4)identification_number");
         System.out.println("Please add the number");
         Scanner myInput = new Scanner(System.in);
         int option_number = myInput.nextInt();
 
         if (option_number == 1) {
-            System.out.println("Please enter employee id number");
-            int idnumber = myInput.nextInt();
-            System.out.println("Please enter new employee id number");
-            int new_num = myInput.nextInt();
-            update_list_int(Idnumbers, idnumber, new_num);
-
-        }
-        if (option_number == 2) {
             Scanner myInput2 = new Scanner(System.in);
-            System.out.println("Please enter employee firstname");
-            String firstname = myInput2.nextLine();
             System.out.println("Please enter new employee firstname");
             String new_firstname = myInput2.nextLine();
-            update_list_string(firstname_List, firstname, new_firstname);
+            update_list_string(firstname_List, employee_id_update, new_firstname);
 
         }
         if (option_number == 3) {
-            System.out.println("Please enter employee lastname");
-            String lastname = myInput.nextLine();
             System.out.println("Please enter new employee lastname");
             String new_lastname = myInput.nextLine();
-            update_list_string(lastname_List, lastname, new_lastname);
+            update_list_string(lastname_List, employee_id_update, new_lastname);
 
         }
         if (option_number == 4) {
-            System.out.println("Please enter birthday");
-            String birthday = myInput.nextLine();
             System.out.println("Please enter new birthday");
             String new_birthday = myInput.nextLine();
-            update_list_string(birthday_List, birthday, new_birthday);
+            update_list_string(birthday_List, employee_id_update, new_birthday);
 
         }
         if (option_number == 5) {
-            System.out.println("Please enter employee identification_number");
-            int idnumber = myInput.nextInt();
             System.out.println("Please enter new employee identification_number");
-            int new_num = myInput.nextInt();
-            update_list_int(Idnumbers, idnumber, new_num);
+            String new_num = myInput.nextLine();
+            update_list_string(identification_number_List, employee_id_update, new_num);
 
         }
+        additional_operation();
     }
 
     public void employee() {
