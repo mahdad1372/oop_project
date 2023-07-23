@@ -100,7 +100,7 @@ public class project {
     public void display_projects(){
         if (project_id_list.size() > 0) {
             for (int i = 0; i <= project_id_list.size() - 1; i++) {
-                System.out.println("So the project " + project_name_list.get(i) + "from the type of "
+                System.out.println("So the project " + project_name_list.get(i) + " from the type of "
                         + project_type_list.get(i) + " has the id of " +project_id_list.get(i));
             }
         } else {

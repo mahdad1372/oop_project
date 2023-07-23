@@ -8,23 +8,24 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class task {
+    private int task_id;
     class task_specification{
-        private Integer task_id;
+
         private String task_name;
         private String description;
         static ArrayList<Integer> task_id_list = new ArrayList<>();
         static ArrayList<String> task_name_list = new ArrayList<>();
         static ArrayList<String> description_list = new ArrayList<>();
-        public void add_detail_task (String name, String description, String employee_name , String project_name)
+        public void add_detail_task (String name, String description, String employee_name , String project_name ,Integer task_id )
         {
-            this.task_id += 1;
+
             this.task_name = name;
             this.description = description;
-            this.task_id_list.add(this.task_id);
+            this.task_id_list.add(task_id);
             this.task_name_list.add(this.task_name);
             this.description_list.add(this.description);
-            System.out.println("So the task " + name + " and description of  " + description+ " with the id "+ this.task_id+
-                "devoted to the "+ employee_name + " and it's related to the project of "
+            System.out.println("So the task " + name + " and description of  " + description+ " with the id "+ task_id+
+                " devoted to the "+ employee_name + " and it's related to the project of "
             + project_name);
         }
     }
@@ -66,7 +67,6 @@ public class task {
         System.out.println("Please add the project id that you want to create task for it");
         Scanner add_project_scanner = new Scanner(System.in);
         Integer project_id = add_project_scanner.nextInt();
-//        project.check_project_by_id(Integer.parseInt(project_id));
         boolean project_check_id = project.check_project_by_id(project_id);
         if (!project_check_id){
             System.out.println("sorry this project is not in the list please try again");
@@ -93,7 +93,9 @@ public class task {
         String employee_name = employee.getName();
         project_spec.employee_name_list.add(employee_name);
         project_spec.project_name_list.add(project.check_project_name(project_spec.project_id));
-        new_task.add_detail_task(task_name,add_description,employee_name,project.check_project_name(project_spec.project_id));
+        this.task_id =  this.task_id+ 1;
+        new_task.add_detail_task(task_name,add_description,employee_name,project.check_project_name(project_spec.project_id),
+                this.task_id);
         this.additional_operation();
     }
     public void update_task(){
@@ -194,7 +196,7 @@ public class task {
         task_specification new_task = new task_specification();
         if (new_task.task_id_list.size() > 0) {
             for (int i = 0; i <= new_task.task_id_list.size() - 1; i++) {
-                System.out.println("So the task " + new_task.task_name_list.get(i) + "with the id "
+                System.out.println("So the task " + new_task.task_name_list.get(i) + " with the id "
                         + new_task.task_id_list.get(i) + " that is about  " + new_task.description_list.get(i)
                 + " from project of " + project.project_name_list.get(i) +
                         " is devoted to the " + project.employee_name_list.get(i));
