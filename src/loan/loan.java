@@ -26,20 +26,19 @@ public class loan {
 
 
     public void add_loan() {
+        Scanner myInput = new Scanner(System.in);
         employee employee = new employee();
-        System.out.println("Please add the loan id");
-        int idnumber = myInput.nextInt();
-        this.loan_id = idnumber;
+        this.loan_id = this.loan_id + 1;
         loan_id_List.add(this.loan_id);
         System.out.println("Please add the loan type");
         String loantype = myInput.nextLine();
         this.loan_type = loantype;
         loan_type_List.add(this.loan_type);
-        System.out.println("Please add the loan amonut per euro");
+        System.out.println("Please add the loan amount per euro");
         int loanamount = myInput.nextInt();
         this.loan_amount = loanamount;
         loan_amount_List.add(this.loan_amount);
-        System.out.println("Please add the employee id that you want to give hime the loan");
+        System.out.println("Please add the employee id that you want to give him the loan");
         int employee_id = myInput.nextInt();
         boolean containsElement = employee.checking_employee_id(employee_id);
         if (containsElement) {
@@ -87,7 +86,7 @@ public class loan {
         Idnumbers_employee_frk.remove(index);
         loan_type_List.remove(index);
         loan_amount_List.remove(index);
-        System.out.println("Now the load with the id number " + idnumber_loan +
+        System.out.println("Now the loan with the id number " + idnumber_loan +
                 "completely remove");
         additional_operation();
     }

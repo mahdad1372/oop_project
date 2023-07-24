@@ -34,8 +34,9 @@ public class department {
         boolean id_contain = department_id_list.contains(department_id);
         if (id_contain){
             int index = department_id_list.indexOf(department_id);
-            System.out.println("Please add the new name if the department");
-            String new_department = myInput.nextLine();
+            System.out.println("Please add the new name of the department");
+            Scanner update_department_input = new Scanner(System.in);
+            String new_department = update_department_input.nextLine();
             department_name_list.set(index,new_department);
             System.out.println("The department sucsessfully updated");
         }else{

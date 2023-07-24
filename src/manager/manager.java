@@ -21,9 +21,15 @@ public class manager {
     public void add_manager(){
         employee employee = new employee();
         department department = new department();
+        menu menu = new menu();
         System.out.println("Please add the employee id of the manager");
         Scanner add_manager_scanner = new Scanner(System.in);
         int employee_id = add_manager_scanner.nextInt();
+        boolean availabiity_employees = employee.availability_employee();
+        if (!availabiity_employees){
+            System.out.println("Sorry for adding the manager you need to add some employee, now there is not any employee");
+            menu.menu_description();
+        }
         boolean availabiity = employee.checking_employee_id(employee_id);
         if (!availabiity){
             System.out.println("Sorry the employee id that you add is not in the list");
@@ -99,7 +105,7 @@ public class manager {
         int manager_id = delete_manager_scanner.nextInt();
         boolean id_contain = manager_id_list.contains(manager_id);
         if (id_contain){
-            int index = manager_id_list.indexOf(id_contain);
+            int index = manager_id_list.indexOf(manager_id);
             department_id_list.remove(index);
             manager_id_list.remove(index);
             employee_id_list.remove(index);

@@ -4,6 +4,7 @@ import attendance.attendance;
 import department.department;
 import employee.employee;
 import loan.loan;
+import manager.manager;
 import project.project;
 import role.role;
 import salary.salary;
@@ -24,9 +25,10 @@ public class menu {
         employee employee_section = new employee();
         department department = new department();
         attendance attendance = new attendance();
+        manager manager = new manager();
         System.out.println("Hello dear manager welcome to the employee managment system");
         System.out.println("Which section you want to enter: 1)employee registration and details  2)loan" +
-                " 3)salary  4)department  5)role  6)project  7)task 8)Attendance  9)exit");
+                " 3)salary  4)department  5)role  6)project  7)task 8)Attendance 9)Manager 10)exit");
         int option = myInput.nextInt();
         if (option == 1) {
             employee_section.employee();
@@ -55,6 +57,9 @@ public class menu {
             attendance.attendence_description();
         }
         if (option == 9) {
+            manager.manager_description();
+        }
+        if (option == 10) {
             System.exit(0);
         }
     }
